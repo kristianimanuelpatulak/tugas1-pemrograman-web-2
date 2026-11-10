@@ -2,8 +2,6 @@
 
     <x-slot:title>{{ $title }}</x-slot>
 
-    <a class="btn btn-primary mb-3" href="/client" role="button">Back to Clients</a>
-
     <form method="POST" action="{{ route('client.store') }}">
         @csrf
 
@@ -36,8 +34,10 @@
             <label for="gender" class="form-label">Gender</label>
             <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender">
                 <option value="">Pilih Gender</option>
-                <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
+                </option>
+                <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                </option>
             </select>
             @error('gender')
                 <div class="invalid-feedback">

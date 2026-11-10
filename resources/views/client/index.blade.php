@@ -22,16 +22,27 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($clients as $client)
-                <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $client->name }}</td>
-                    <td>{{ $client->gender }}</td>
-                    <td>{{ $client->email }}</td>
-                    <td>{{ $client->number }}</td>
-                    <td>{{ $client->address }}</td>
-                </tr>
-            @endforeach
+            <ul class="list-group">
+                @foreach ($clients as $client)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $client->name }}</td>
+                        <td>
+                            @if ($client->gender == 'male' || $client->gender == 'Laki-laki')
+                                Laki-laki
+                            @else
+                                Perempuan
+                            @endif
+                        </td>
+                        <td>{{ $client->email }}</td>
+                        <td>{{ $client->number }}</td>
+                        <td>{{ $client->address }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="{{ route('client.edit', $client) }}"
+                                role="button">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
         </tbody>
     </table>
 
