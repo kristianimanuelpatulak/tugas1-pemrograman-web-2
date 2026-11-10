@@ -1,16 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/client', function () {
-    return view('client.index', ['title' => 'Clients List']);
-});
-
-
-Route::get('/client/create', function () {
-    return view('client.create', ['title' => 'Client Create']);
-});
+Route::get('/client', [ClientController::class, 'index']);
+Route::get('/client/create', [ClientController::class, 'create']);
