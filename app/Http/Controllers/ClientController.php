@@ -31,7 +31,31 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi inputan dari form create client
+        $validated = $request->validate([
+        'name' => ['required', 'max:255'],
+        'gender' => ['required'],
+        'email' => ['required', 'unique:clients'],
+        'number' => ['required', 'unique:clients'],
+        'address' => ['required'],
+    ],  
+    [
+        // Pesan error yang akan ditampilkan jika inputan tidak sesuai dengan validasi
+        'name.required' => 'Nama Pelanggan harus diisi.',
+        'name.max' => 'Nama Pelanggan tidak boleh lebih dari 255 karakter.',
+        'gender.required' => 'Gender harus diisi.',
+        'email.required' => 'Email harus diisi.',
+        'email.unique' => 'Email sudah digunakan.',
+        'number.required' => 'No. Pelanggan harus diisi.',
+        'number.unique' => 'No. Pelanggan sudah digunakan.',
+        'number.numeric' => 'No. Pelanggan harus berupa angka.',
+        'address.required' => 'Alamat harus diisi.',
+    ]);
+
+    Client::create($validated);
+
+    // Setelah berhasil menyimpan data, redirect ke halaman index client dengan pesan sukses
+    return to_route('client.index')->with('success', 'Data Pelanggan berhasil ditambahkan.');
     }
 
     /**

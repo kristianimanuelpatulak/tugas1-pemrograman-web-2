@@ -21,7 +21,7 @@ class ClientFactory extends Factory
         'gender'  => $gender = $this->faker->randomElement(['male', 'female']),
         'name'    => $name = $this->faker->name($gender),
         'email'   => strtolower(str_replace(' ', '', $name)) . '@gmail.com',
-        'phone'   => '(+62) 8' . $this->faker->numerify('##########'),
+        'number'   =>$this->faker->numerify('##########'),
         'address' => $this->faker->address(),
         ];
     }

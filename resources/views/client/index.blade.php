@@ -1,8 +1,13 @@
 <x-app>
 
     <x-slot:title>{{ $title }}</x-slot>
-
-    <a class="btn btn-primary mb -3" href="/client/create" role="button">Add Client</a>
+    {{-- Pesan Yang Ditampilkan Setelah Data Berhasil Disimpan --}}
+    @session('success')
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endsession
+    <a class="btn btn-primary mb-3" href="{{ route('client.create') }}" role="button">Add Client</a>
 
     <table class="table table-sm table-bordered border-dark table-hover" style="font-size: 13px;">
         <thead>
@@ -11,7 +16,7 @@
                 <th scope="col">NAMA</th>
                 <th scope="col">GENDER</th>
                 <th scope="col">EMAIL</th>
-                <th scope="col">TELEPON</th>
+                <th scope="col">NO. PELANGGAN</th>
                 <th scope="col">ALAMAT</th>
                 <th scope="col" style="width: 140px;">Aksi</th>
             </tr>
@@ -23,9 +28,8 @@
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->gender }}</td>
                     <td>{{ $client->email }}</td>
-                    <td>{{ $client->phone }}</td>
+                    <td>{{ $client->number }}</td>
                     <td>{{ $client->address }}</td>
-                    </td>
                 </tr>
             @endforeach
         </tbody>
