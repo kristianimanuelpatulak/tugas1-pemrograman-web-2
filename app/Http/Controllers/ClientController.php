@@ -12,23 +12,20 @@ class ClientController extends Controller
      */
     public function index()
     {
+        // Mengambil semua data client dari database dan mengurutkannya berdasarkan waktu terbaru
         return view('client.index', [
         'title' => 'Client',
-        'clients' => Client::all()
+        'clients' => Client::latest()->get()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Menunjukkan halaman create client
     public function create()
     {
         return view('client.create', ['title' => 'Client Create']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Menyimpan data client baru ke database
     public function store(Request $request)
     {
         // Validasi inputan dari form create client
@@ -75,9 +72,7 @@ class ClientController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Memperbarui data client yang dipilih di database
     public function update(Request $request, Client $client)
     {
         // Validasi inputan dari form create client
@@ -107,11 +102,12 @@ class ClientController extends Controller
     return to_route('client.index')->with('success', 'Data Pelanggan berhasil diupdate.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Menghapus data client yang dipilih dari database
     public function destroy(Client $client)
     {
-        //
+        $client->delete($client);
+
+        // Setelah berhasil menghapus data, redirect ke halaman index client dengan pesan sukses
+        return to_route('client.index')->with('success', 'Data Pelanggan berhasil dihapus.');
     }
 }

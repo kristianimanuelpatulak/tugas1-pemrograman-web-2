@@ -10,3 +10,4 @@ Route::get('/client/create', [ClientController::class, 'create'])->name('client.
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
 Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
+Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
